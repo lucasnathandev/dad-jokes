@@ -2,13 +2,15 @@ const jokeContainer = document.querySelector(".joke")
 const btn = document.querySelector("#joke-btn")
 
 async function createJokeElement() {
+  const joke = document.createElement("p")
   try {
-    const joke = document.createElement("p")
     const { joke: text } = await getJoke()
     joke.textContent = text
-    return joke
   } catch (e) {
-    return console.log(e.message)
+    joke.textContent =
+      "Cannot generate joke, and it's not a joke. Please touch the button below."
+  } finally {
+    return joke
   }
 }
 
@@ -28,18 +30,21 @@ async function updateJoke(jokeElement) {
     const { joke } = await getJoke()
     jokeElement.textContent = joke
   } catch (e) {
-    return console.log(e.message)
+    jokeElement.textContent =
+      "Cannot generate joke, and it's not a joke. Please touch the button below."
+    updateJoke(jokeElement)
   }
 }
 
 async function main() {
-  console.log(await getJoke())
   try {
     const joke = await createJokeElement()
     jokeContainer.appendChild(joke)
     btn.addEventListener("pointerup", () => updateJoke(joke))
   } catch (e) {
-    console.log(e.message)
+    joke.textContent =
+      "Cannot generate joke, and it's not a joke. Please touch the button below"
+    updateJoke(joke)
   }
 }
 
