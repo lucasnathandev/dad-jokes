@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
   box-sizing: border-box;
@@ -57,4 +57,12 @@ h3 {
 
 .btn:focus {
   outline: none;
+}
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 50px 0;
+    height: 600px;
+    max-height: 90vh;
+  }
 }
